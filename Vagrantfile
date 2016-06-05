@@ -1,6 +1,6 @@
 Vagrant.configure("2") do |config|
   config.vm.define "web" do |web|
-    web.vm.box = "precise64"
+    web.vm.box = "ubuntu/precise64"
     web.vm.hostname = 'web'
     web.vm.box_url = "ubuntu/precise64"
 
@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "db" do |db|
-    db.vm.box = "precise64"
+    db.vm.box = "ubuntu/precise64"
     db.vm.hostname = 'db'
     db.vm.box_url = "ubuntu/precise64"
 
