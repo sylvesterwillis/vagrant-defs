@@ -3,6 +3,7 @@ Vagrant.configure("2") do |config|
     web.vm.box = "ubuntu/precise64"
     web.vm.hostname = 'web'
     web.vm.box_url = "ubuntu/precise64"
+    web.vm.provision :shell, path: "bootstrap.sh"
 
     web.vm.network :private_network, ip: "192.168.56.101"
 
@@ -17,6 +18,7 @@ Vagrant.configure("2") do |config|
     db.vm.box = "ubuntu/precise64"
     db.vm.hostname = 'db'
     db.vm.box_url = "ubuntu/precise64"
+    db.vm.provision :shell, path: "bootstrap.sh"
 
     db.vm.network :private_network, ip: "192.168.56.102"
 
