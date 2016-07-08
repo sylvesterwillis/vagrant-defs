@@ -3,7 +3,9 @@ Vagrant.configure("2") do |config|
     server.vm.box = "ubuntu/precise64"
     server.vm.hostname = 'server'
     server.vm.box_url = "ubuntu/precise64"
-    server.vm.provision :shell, path: "bootstrap.sh"
+    server.vm.provision :shell, path: "bootstrap-all.sh", env: {GOPATH: "/home/vagrant/godev"}
+    server.vm.provision :shell, path: "bootstrap-server.sh"
+
 
     server.vm.network :private_network, ip: "192.168.56.101"
 
@@ -14,18 +16,18 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  config.vm.define "client1" do |client1|
-    client1.vm.box = "ubuntu/precise64"
-    client1.vm.hostname = 'client1'
-    client1.vm.box_url = "ubuntu/precise64"
-    client1.vm.provision :shell, path: "bootstrap.sh"
+  config.vm.define "client" do |client|
+    client.vm.box = "ubuntu/precise64"
+    client.vm.hostname = 'client'
+    client.vm.box_url = "ubuntu/precise64"
+    client.vm.provision :shell, path: "bootstrap-all.sh", env: {GOPATH: "/home/vagrant/godev"}
 
-    client1.vm.network :private_network, ip: "192.168.56.102"
+    client.vm.network :private_network, ip: "192.168.56.102"
 
-    client1.vm.provider :virtualbox do |v|
+    client.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       v.customize ["modifyvm", :id, "--memory", 512]
-      v.customize ["modifyvm", :id, "--name", "client1"]
+      v.customize ["modifyvm", :id, "--name", "client"]
     end
   end
 end
