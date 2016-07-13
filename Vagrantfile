@@ -4,8 +4,6 @@ Vagrant.configure("2") do |config|
     server.vm.hostname = 'server'
     server.vm.box_url = "ubuntu/precise64"
     server.vm.provision :shell, path: "bootstrap-all.sh", env: {GOPATH: "/home/vagrant/godev"}
-    server.vm.provision :shell, path: "bootstrap-server.sh"
-
 
     server.vm.network :private_network, ip: "192.168.56.101"
 
